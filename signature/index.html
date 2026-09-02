@@ -5,50 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mode40 email signature</title>
 <style>
-  :root{--cyan:#00D4DE;--navy:#001D25;--ink:#1A1A1A;--body:#262626;--grey:#8A8A8A;--zebra:#F0F0F0;--scope:#E6F8FB;--ok:#118a92;--bad:#B3261E;}
-  /* single-theme on purpose: the preview must sit on white, like a real email */
+  /* Notion-native look: Notion's own font stack, ink and hairline colours, so the embed reads as part of the page. */
+  :root{--cyan:#00D4DE;--navy:#001D25;--ink:#37352F;--body:#37352F;--grey:rgba(55,53,47,.65);--line:rgba(55,53,47,.16);--zebra:#F7F6F3;--scope:#F1F1EF;--ok:#0F7B6C;--bad:#E03E3E;}
   :root{color-scheme:light}
   *{box-sizing:border-box}
-  body{margin:0;background:#fff;color:var(--body);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
-  .wrap{max-width:720px;margin:0 auto;padding:32px 20px 80px}
-  h1{font-size:22px;margin:0 0 6px;color:var(--ink)}
-  .lede{margin:0 0 28px;color:var(--grey)}
-  .step{border:1px solid #e2e2e2;border-radius:6px;margin-bottom:18px;overflow:hidden;transition:opacity .2s}
-  .step.locked{opacity:.38;pointer-events:none}
-  .step-head{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--zebra)}
-  .num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  body{margin:0;background:#fff;color:var(--body);font:16px/1.5 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";-webkit-font-smoothing:antialiased}
+  .wrap{max-width:708px;margin:0 auto;padding:8px 4px 40px}
+  h1{display:none}
+  .lede{margin:0 0 20px;color:var(--grey);font-size:14px}
+  .step{border:1px solid var(--line);border-radius:4px;margin-bottom:12px;overflow:hidden;transition:opacity .2s}
+  .step.locked{opacity:.4;pointer-events:none}
+  .step-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--zebra)}
+  .num{flex:0 0 22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
   .step.done .num{background:var(--ok)}
-  .step-head h2{font-size:15px;margin:0;color:var(--ink)}
-  .step-body{padding:18px 20px 20px}
-  label{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:14px 0 4px}
+  .step-head h2{font-size:15px;font-weight:600;margin:0;color:var(--ink)}
+  .step-body{padding:14px 16px 16px}
+  label{display:block;font-size:12px;color:var(--grey);margin:12px 0 4px}
   label:first-child{margin-top:0}
-  label span{text-transform:none;letter-spacing:0}
-  input,select{width:100%;padding:9px 10px;border:1px solid #d0d0d0;border-radius:4px;font:inherit;color:var(--ink);background:#fff}
-  input:focus,select:focus{outline:2px solid var(--cyan);border-color:var(--cyan)}
+  input,select{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:4px;font:inherit;font-size:14px;color:var(--ink);background:#fff}
+  input:focus,select:focus{outline:2px solid rgba(35,131,226,.5);border-color:transparent}
   input.bad{border-color:var(--bad)}
   .hint{font-size:12px;color:var(--grey);margin-top:4px}
   .hint.ok{color:var(--ok)} .hint.bad{color:var(--bad)}
-  .preview{border:1px solid #e2e2e2;border-radius:4px;padding:22px 22px 24px;background:#fff}
+  .preview{border:1px solid var(--line);border-radius:4px;padding:18px 20px 20px;background:#fff}
   .msg{margin:0 0 18px 0}
-  .confirm{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--ink)}
-  .confirm input{width:18px;height:18px;margin:0}
-  button{padding:10px 16px;border:0;border-radius:4px;background:var(--navy);color:#fff;font:600 14px/1 inherit;cursor:pointer;white-space:nowrap}
-  button:hover{background:#0a3542}
-  button.done{background:var(--ok)}
-  .font-box{background:var(--scope);border-radius:6px;padding:14px 16px;margin:0 0 6px}
+  .confirm{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;color:var(--ink)}
+  .confirm input{width:16px;height:16px;margin:0}
+  button{padding:7px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);font:500 14px/1.2 inherit;cursor:pointer;white-space:nowrap;box-shadow:rgba(15,15,15,.1) 0 1px 2px}
+  button:hover{background:var(--zebra)}
+  button.done{background:#DBEDDB;border-color:transparent;color:#1C3829}
+  .font-box{background:var(--scope);border-radius:4px;padding:12px 14px;margin:0 0 6px;font-size:14px}
   .font-box b{color:var(--ink)}
-  ol{margin:0;padding-left:20px} li{margin:6px 0}
+  ol{margin:0;padding-left:20px;font-size:14px} li{margin:5px 0}
   .note{font-size:13px;color:var(--grey);margin:10px 0 0}
-  .final{background:var(--navy);color:#fff;border-radius:6px;padding:16px 18px}
-  .final b{color:var(--cyan)}
+  .final{background:var(--scope);color:var(--ink);border-left:3px solid var(--cyan);border-radius:4px;padding:12px 14px;font-size:14px}
+  .final b{color:var(--ink)}
   .final p{margin:0 0 8px} .final p:last-child{margin:0}
-  .foot{margin-top:28px;font-size:13px;color:var(--grey)}
+  .foot{margin-top:20px;font-size:12px;color:var(--grey)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>mode40 email signature</h1>
-  <p class="lede">Six steps, about five minutes. Each step opens when the one before it is confirmed. Team standard is Arial 12 everywhere.</p>
+  <p class="lede">Six steps, about five minutes. Each step opens when the one before it is confirmed. Team standard is Arial 12 in every mail app.</p>
 
   <section class="step" id="s1">
     <div class="step-head"><div class="num">1</div><h2>Fill in your information</h2></div>
