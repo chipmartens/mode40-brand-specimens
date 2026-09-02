@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mode40 email signature</title>
+<style>
+  :root{--cyan:#00D4DE;--navy:#001D25;--ink:#1A1A1A;--body:#262626;--grey:#8A8A8A;--zebra:#F0F0F0;--scope:#E6F8FB;--ok:#118a92;--bad:#B3261E;}
+  /* single-theme on purpose: the preview must sit on white, like a real email */
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--body);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  .wrap{max-width:720px;margin:0 auto;padding:32px 20px 80px}
+  h1{font-size:22px;margin:0 0 6px;color:var(--ink)}
+  .lede{margin:0 0 28px;color:var(--grey)}
+  .step{border:1px solid #e2e2e2;border-radius:6px;margin-bottom:18px;overflow:hidden;transition:opacity .2s}
+  .step.locked{opacity:.38;pointer-events:none}
+  .step-head{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--zebra)}
+  .num{flex:0 0 26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .step.done .num{background:var(--ok)}
+  .step-head h2{font-size:15px;margin:0;color:var(--ink)}
+  .step-body{padding:18px 20px 20px}
+  label{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:14px 0 4px}
+  label:first-child{margin-top:0}
+  label span{text-transform:none;letter-spacing:0}
+  input,select{width:100%;padding:9px 10px;border:1px solid #d0d0d0;border-radius:4px;font:inherit;color:var(--ink);background:#fff}
+  input:focus,select:focus{outline:2px solid var(--cyan);border-color:var(--cyan)}
+  input.bad{border-color:var(--bad)}
+  .hint{font-size:12px;color:var(--grey);margin-top:4px}
+  .hint.ok{color:var(--ok)} .hint.bad{color:var(--bad)}
+  .preview{border:1px solid #e2e2e2;border-radius:4px;padding:22px 22px 24px;background:#fff}
+  .msg{margin:0 0 18px 0}
+  .confirm{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--ink)}
+  .confirm input{width:18px;height:18px;margin:0}
+  button{padding:10px 16px;border:0;border-radius:4px;background:var(--navy);color:#fff;font:600 14px/1 inherit;cursor:pointer;white-space:nowrap}
+  button:hover{background:#0a3542}
+  button.done{background:var(--ok)}
+  .font-box{background:var(--scope);border-radius:6px;padding:14px 16px;margin:0 0 6px}
+  .font-box b{color:var(--ink)}
+  ol{margin:0;padding-left:20px} li{margin:6px 0}
+  .note{font-size:13px;color:var(--grey);margin:10px 0 0}
+  .final{background:var(--navy);color:#fff;border-radius:6px;padding:16px 18px}
+  .final b{color:var(--cyan)}
+  .final p{margin:0 0 8px} .final p:last-child{margin:0}
+  .foot{margin-top:28px;font-size:13px;color:var(--grey)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>mode40 email signature</h1>
+  <p class="lede">Six steps, about five minutes. Each step opens when the one before it is confirmed. Team standard is Arial 12 everywhere.</p>
+
+  <section class="step" id="s1">
+    <div class="step-head"><div class="num">1</div><h2>Fill in your information</h2></div>
+    <div class="step-body">
+      <label for="name">Full name</label>
+      <input id="name" value="" placeholder="First Last" autocomplete="name">
+      <label for="title">Title</label>
+      <input id="title" value="" placeholder="Your title at mode40">
+      <label for="signoff">Sign-off line <span>(optional)</span></label>
+      <input id="signoff" placeholder="Thanks,">
+      <div class="hint">Shows above the icon. Leave blank if you type your own sign-off each time.</div>
+      <label for="linkedin">LinkedIn URL <span>(optional)</span></label>
+      <input id="linkedin" placeholder="https://www.linkedin.com/in/yourname">
+      <div class="hint" id="li-hint">Paste the link from your LinkedIn profile. Leave blank and the LinkedIn line is left out.</div>
+      <div class="confirm"><input type="checkbox" id="c1"><label for="c1" style="margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">That is all correct</label></div>
+    </div>
+  </section>
+
+  <section class="step locked" id="s2">
+    <div class="step-head"><div class="num">2</div><h2>Confirm your signature looks correct</h2></div>
+    <div class="step-body">
+      <div class="preview"><p class="msg" id="msg">Sounds good. I will have the deck to you Thursday.</p><div id="sig"></div></div>
+      <p class="note">Only your name is bold. The links are teal. If anything is off, fix it in step 1.</p>
+      <div class="confirm"><input type="checkbox" id="c2"><label for="c2" style="margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">Looks right</label></div>
+    </div>
+  </section>
+
+  <section class="step locked" id="s3">
+    <div class="step-head"><div class="num">3</div><h2>Confirm the mail app you are adding it to</h2></div>
+    <div class="step-body">
+      <label for="client">Mail app</label>
+      <select id="client">
+        <option value="outlook">Outlook (new, web, Mac, Windows)</option>
+        <option value="outlook-classic">Outlook classic (Windows)</option>
+        <option value="apple">Apple Mail (Mac)</option>
+        <option value="ios">iPhone / iPad Mail</option>
+        <option value="gmail">Gmail</option>
+      </select>
+      <div class="hint">Most of us are on new Outlook. If you use more than one, do this whole page once per app.</div>
+      <div class="confirm"><input type="checkbox" id="c3"><label for="c3" style="margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">That is my mail app</label></div>
+    </div>
+  </section>
+
+  <section class="step locked" id="s4">
+    <div class="step-head"><div class="num">4</div><h2>Set your mail app to Arial 12</h2></div>
+    <div class="step-body">
+      <div class="font-box" id="fontbox"></div>
+      <p class="note">Team standard: Arial, 12, black, in every app. The signature is built in exactly that, so if your app is set to anything else the signature will look different from your message.</p>
+      <div class="confirm"><input type="checkbox" id="c4"><label for="c4" style="margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">My compose font matches</label></div>
+    </div>
+  </section>
+
+  <section class="step locked" id="s5">
+    <div class="step-head"><div class="num">5</div><h2>Copy the signature and paste it in</h2></div>
+    <div class="step-body">
+      <button id="copy">Copy signature</button>
+      <ol id="steps" style="margin-top:14px"></ol>
+      <p class="note" id="note"></p>
+      <div class="confirm"><input type="checkbox" id="c5"><label for="c5" style="margin:0;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">Pasted and saved</label></div>
+    </div>
+  </section>
+
+  <section class="step locked" id="s6">
+    <div class="step-head"><div class="num">6</div><h2>Send a test</h2></div>
+    <div class="step-body">
+      <div class="final">
+        <p>Send one new email from that app to <b>jarvis@mode40.com</b>. Subject: <b>Signature test</b>. Body can be anything.</p>
+        <p>Jarvis checks the signature and messages you in your Teams 1:1 chat to confirm, or to tell you what to fix.</p>
+      </div>
+      <p class="note">Jarvis checks every 10 minutes, so expect the message within about 15 minutes. If nothing arrives, message Chip.</p>
+    </div>
+  </section>
+
+  <p class="foot">The icon is hosted on the mode40 CDN, so it shows for recipients without attachments. Questions: Chip.</p>
+</div>
+
+<script>
+(function(){
+  var ICON='https://342910769.fs1.hubspotusercontent-na3.net/hubfs/342910769/email-signatures/mode40-icon.png'; // 182x144, shown at 41x32
+  // The preview renders from this embedded copy (some viewers block remote images). Copy swaps in the hosted URL, because Gmail strips embedded images from signatures.
+  var ICON_DATA='data:image/png;base64,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';
+  var C={teal:'#00D4DE',ink:'#1A1A1A',body:'#262626'};
+
+  // Team standard (Chip 2026-09-02): Arial, 12pt (= 16px) in every app. One font, one size, so every teammate's mail reads the same.
+  var FONT="Arial, Helvetica, sans-serif", SIZE='12pt';
+  var CLIENTS={
+    'outlook':        {font:FONT, size:SIZE, compose:'Arial, 12, black', composePath:'Settings (gear) &gt; Mail &gt; Compose and reply &gt; Message format. Pick Arial, size 12, black. Save.', steps:[
+      'Outlook: <b>Settings</b> (gear) &gt; <b>Accounts</b> &gt; <b>Signatures</b>. On Mac: Outlook menu &gt; Settings &gt; Signatures.',
+      'Create a new signature and name it <b>mode40</b>.',
+      'Click into the edit box and paste (Cmd+V / Ctrl+V).',
+      'Set it as the default for new messages and for replies, then save.'],
+      note:'Outlook may convert the icon into an embedded image. That is fine.'},
+    'outlook-classic':{font:FONT, size:SIZE, compose:'Arial, 12, Automatic', composePath:'File &gt; Options &gt; Mail &gt; Stationery and Fonts. Set New mail messages and Replying to Arial, 12, Automatic.', steps:[
+      'Outlook: <b>File</b> &gt; <b>Options</b> &gt; <b>Mail</b> &gt; <b>Signatures</b>.',
+      'Click <b>New</b> and name it <b>mode40</b>.',
+      'Click into the edit box and paste (Ctrl+V).',
+      'Under "Choose default signature", pick it for new messages and replies. OK.'],
+      note:'Outlook may convert the icon into an embedded image. That is fine.'},
+    'apple':          {font:FONT, size:SIZE, compose:'Arial, Regular, 16', composePath:'Mail &gt; Settings &gt; Fonts &amp; Colors &gt; Message font: Select, then Arial, Regular, 16. Apple Mail counts in pixels, so its 16 is the same size as Outlook\'s 12.', steps:[
+      'Mail: <b>Mail</b> menu &gt; <b>Settings</b> &gt; <b>Signatures</b>. Pick your mode40 account.',
+      'Click <b>+</b> and name it <b>mode40</b>.',
+      'Click into the signature box and paste (Cmd+V).',
+      '<b>Untick "Always match my default message font."</b> Ticked, it strips the bold, the teal links, and the icon spacing. The signature is already Arial 16, so it matches your body text without it.',
+      'Close the window to save.'],
+      note:'Mail may show a placeholder for the icon in the settings window. It renders correctly in real messages.'},
+    'ios':            {font:FONT, size:SIZE, compose:'system default', composePath:'iPhone Mail has no compose font setting. Your message uses the system font; the signature stays Arial 12 like the rest of the team. Nothing to change.', steps:[
+      'Do this on your iPhone: open this page in Safari, fill it in again, tap <b>Copy signature</b>.',
+      '<b>Settings</b> &gt; <b>Apps</b> &gt; <b>Mail</b> &gt; <b>Signature</b>. Pick "Per account" and choose mode40.',
+      'Tap into the box, tap-and-hold, <b>Paste</b>.',
+      'If it pastes bigger or bolder than expected, give the phone a gentle shake and tap <b>Undo Change Attributes</b>. That keeps the layout but drops stray formatting.'],
+      note:'Some iOS versions drop the icon and keep the text. The signature still reads cleanly without it.'},
+    'gmail':          {font:FONT, size:SIZE, compose:'Sans Serif, Normal, black', composePath:'Settings (gear) &gt; See all settings &gt; General &gt; Default text style. Pick Sans Serif (that is Arial), size Normal, black. Save changes at the bottom. Gmail has no 12pt option, so your body text will sit a touch smaller than the signature. The signature itself stays at the team standard.', steps:[
+      'Gmail: <b>Settings</b> (gear) &gt; <b>See all settings</b> &gt; <b>General</b> &gt; <b>Signature</b>.',
+      'Click <b>Create new</b> and name it <b>mode40</b>.',
+      'Click into the box and paste (Cmd+V / Ctrl+V).',
+      'Set "Signature defaults" for new emails and replies, then <b>Save changes</b> at the bottom.'],
+      note:'The Gmail phone app only supports plain-text mobile signatures. Leave the mobile signature off; mail sent from your computer still carries this one.'}
+  };
+
+  var $=function(id){return document.getElementById(id)};
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+
+  // LinkedIn: empty is fine; otherwise it must be a personal profile URL.
+  var LI=/^https?:\/\/(www\.)?linkedin\.com\/in\/[A-Za-z0-9\-_%]+\/?$/i;
+  function linkedin(){
+    var v=$('linkedin').value.trim(); if(!v) return {ok:true,url:''};
+    if(!/^https?:\/\//i.test(v)) v='https://'+v;
+    if(!/^https?:\/\/(www\.)?linkedin\.com/i.test(v)) v=v.replace(/^https?:\/\//i,'https://www.linkedin.com/in/').replace(/\/in\/in\//,'/in/');
+    return {ok:LI.test(v),url:v};
+  }
+
+  function build(){
+    var c=CLIENTS[$('client').value], li=linkedin(), so=$('signoff').value.trim();
+    var base="font-family:"+c.font+";font-size:"+c.size+";line-height:1.4;color:"+C.body+";";
+    var line=function(h){return '<div style="'+base+'margin:0;">'+h+'</div>'};
+    var a=function(href,text){return '<a href="'+esc(href)+'" style="'+base+'color:'+C.teal+';text-decoration:none;">'+esc(text)+'</a>'};
+    return '<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;'+base+'"><tr><td style="padding:0;'+base+'">'+
+      (so? line(esc(so))+line('&nbsp;') : '')+
+      '<a href="https://mode40.com" style="text-decoration:none;"><img src="'+ICON_DATA+'" width="41" height="32" alt="mode40" style="display:block;border:0;width:41px;height:32px;margin:0;"></a>'+
+      line('&nbsp;')+
+      line('<strong style="font-weight:700;color:'+C.ink+';">'+esc($('name').value.trim()||'Your Name')+'</strong>')+
+      line(esc($('title').value.trim()||'Title'))+
+      line('mode40')+
+      line('&nbsp;')+
+      line('Learn more at '+a('https://mode40.com','mode40.com'))+
+      (li.ok && li.url? line('Connect with me on '+a(li.url,'LinkedIn')) : '')+
+      '</td></tr></table>';
+  }
+
+  function render(){
+    var c=CLIENTS[$('client').value];
+    $('sig').innerHTML=build();
+    $('msg').style.cssText='font-family:'+c.font+';font-size:'+c.size+';line-height:1.4;color:'+C.body+';margin:0 0 18px 0;';
+    $('fontbox').innerHTML='<b>Your compose font must be: '+c.compose+'</b><br>'+c.composePath;
+    $('steps').innerHTML=c.steps.map(function(s){return '<li>'+s+'</li>'}).join('');
+    $('note').textContent=c.note.replace(/<[^>]+>/g,'');
+
+    // LinkedIn validation
+    var v=$('linkedin').value.trim(), li=linkedin(), h=$('li-hint');
+    $('linkedin').className=(!v||li.ok)?'':'bad';
+    h.className='hint'+(v?(li.ok?' ok':' bad'):'');
+    h.textContent=!v?'Paste the link from your LinkedIn profile. Leave blank and the LinkedIn line is left out.':(li.ok?'Valid. Links to '+li.url:'That does not look like a LinkedIn profile. It should be linkedin.com/in/yourname');
+
+    // Step 1 confirm needs a name, a title, and a valid-or-empty LinkedIn
+    var ready=$('name').value.trim() && $('title').value.trim() && li.ok;
+    $('c1').disabled=!ready; if(!ready) $('c1').checked=false;
+    gate();
+  }
+
+  function gate(){
+    var open=true;
+    for(var i=1;i<=6;i++){
+      var s=$('s'+i), c=$('c'+i);
+      s.classList.toggle('locked',!open);
+      s.classList.toggle('done',!!(c&&c.checked));
+      open=open && !!(c&&c.checked);
+    }
+  }
+
+  function copy(btn){
+    var el=$('sig'), html=el.innerHTML.split(ICON_DATA).join(ICON), text=el.innerText;
+    function ok(){btn.textContent='Copied. Now follow the steps below.';btn.classList.add('done')}
+    function fallback(){
+      var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+      try{document.execCommand('copy');ok()}catch(e){alert('Select the signature in step 2 with your mouse and copy it manually.')}
+      s.removeAllRanges();
+    }
+    if(navigator.clipboard && window.ClipboardItem){
+      navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([text],{type:'text/plain'})})]).then(ok,fallback);
+    } else fallback();
+  }
+
+  ['name','title','signoff','linkedin'].forEach(function(id){$(id).addEventListener('input',function(){$('c2').checked=false;render()})});
+  $('client').addEventListener('change',function(){$('c4').checked=false;$('c5').checked=false;render()});
+  for(var i=1;i<=5;i++) $('c'+i).addEventListener('change',gate);
+  $('copy').addEventListener('click',function(){copy(this)});
+  render();
+})();
+</script>
+</body>
+</html>
